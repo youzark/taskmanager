@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from attributes.attribute_formatter import convert_attributes_to_filter_form
 from maintain_attributes import convert_attribute_to_filter_form
 from subprocess import run
 from matadata.matadata import matadata

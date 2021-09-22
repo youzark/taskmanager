@@ -37,9 +37,9 @@ def query_one_task(task_uuid,attribute_name):
     attribute_value = read_attributes(task_uuid,attribute_name)
     return attribute_value
 
-def query_all_tasks(attributes):
+def query_all_tasks(attributes_filter):
     data = read_data()
-    query_result = { task_uuid:data[task_uuid] for task_uuid in data if has_attributes(data[task_uuid],attributes)  }
+    query_result = { task_uuid:data[task_uuid] for task_uuid in data if has_attributes(data[task_uuid],attributes_filter)  }
     return query_result
 
 def modify_task_attributes(task_uuid,attributes):
