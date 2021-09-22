@@ -1,0 +1,22 @@
+{
+	"workflow" : [
+		{
+			"start time" : "",
+			"end time" : "",
+			"duration" : "f{time}"
+		},
+		{
+			"start time" : "",
+			"end time" : "",
+			"duration" : ""
+		}
+	],
+	"note" : [
+		"f{path}",
+		"f{path}"
+	],
+	"reference" : [
+		"f{path}",
+		"f{path}"
+	]
+}
