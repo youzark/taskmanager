@@ -4,7 +4,6 @@ from maintain_attributes import convert_attribute_to_filter_form
 from subprocess import run
 from matadata.matadata import matadata
 
-
 def task(command,filter,config = ''):
     return run(f"task {config} {filter} {command}",shell=True,capture_output=True).stdout.decode()
 

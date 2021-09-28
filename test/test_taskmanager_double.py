@@ -89,6 +89,12 @@ class TestTaskWarriorDouble:
         assert tsd.query_one_task(uuid2,"project") == "test.project"
         assert tsd.query_one_task(uuid2,"parents") == uuid1
         clear_data_file()
+
+    def test_query_non_exist_attribute_value_return_init_value(self):
+        uuid1,uuid2,uuid3 = create_demo_task_suite()
+        assert tsd.query_one_task(uuid1,"depends") == None
+        assert tsd.query_one_task(uuid1,"parents") == None
+        clear_data_file()
     """
     query_all_tasks
     """
@@ -152,6 +158,29 @@ class TestTaskWarriorDouble:
         uuid = tsd.add_new_task("test description")
         tsd.stop(uuid)
         assert tsd.query_one_task(uuid,"status") == "pending"
+        clear_data_file()
+
+    def test_get_active_task_uuid_raise_Exception_if_no_job_is_active(self):
+        with pytest.raises(Exception) as exception_info:
+            tsd.get_active_task_uuid()
+        assert exception_info.value.args[0] == "no active task"
+
+    def test_get_active_task_uuid_return_correct_uuid_if_only_one_active_job(self):
+        uuid = tsd.add_new_task("test description")
+        tsd.start(uuid)
+        active_task_uuid = tsd.get_active_task_uuid()
+        assert active_task_uuid == uuid
+        clear_data_file()
+
+    def test_get_active_task_uuid_return_the_first_created_uuid_if_only_multiple_active_jobs(self):
+        uuid2 = tsd.add_new_task("test description2")
+        uuid1 = tsd.add_new_task("test description1")
+        uuid3 = tsd.add_new_task("test description3")
+        tsd.start(uuid1)
+        tsd.start(uuid2)
+        tsd.start(uuid3)
+        active_task_uuid = tsd.get_active_task_uuid()
+        assert active_task_uuid == uuid2
         clear_data_file()
 
     """

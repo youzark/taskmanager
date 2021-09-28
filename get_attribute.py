@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import taskwarrior.taskwarrior as taskwarrior
+import taskwarrior 
 
 def get_one_attribute(attribute_name,filter):
     wanted_attribute = taskwarrior.query_all_tasks(attribute_name,filter)
@@ -22,9 +22,6 @@ def get_current_working_task_uuid():
         return task_uuid[0]
     else:
         raise Exception("No ACTIVE task")
-
-def get_newly_created_task_uuid():
-    return get_one_attribute("uuid","+LATEST")[0]
 
 def get_task_tags(task_uuid):
     return taskwarrior.query_one_task(task_uuid,"tags")
